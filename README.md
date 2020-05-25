@@ -40,7 +40,7 @@
 ## Contributors
 
 <table>
-<tr align="center">
+<tr align="center" style="margin 1em">
 
 
 <td>
