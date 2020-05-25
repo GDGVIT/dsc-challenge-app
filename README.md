@@ -12,9 +12,9 @@
 
 
 ## Functionalities
-- [ ]  < insert functionality >
-- [ ]  < insert functionality >
-- [ ]  < insert functionality >
+- [ ]  Oauth login
+- [ ]  Randomly generate question from a pool of questions
+- [ ]  Leaderboard
 - [ ]  < insert functionality >
 
 <br>
@@ -26,35 +26,35 @@
 	-  Flutter SDK
 	-  Android SDK
 	-  Android Studio
-	-  VS Code
+	-  VS Code (optional, but recommended)
 
-* < directions to install > 
+* directions to install
 ```bash
 git clone https://github.com/GDGVIT/dsc-challenge-app.git
 ```
 
-* < directions to execute >
+* directions to execute
 
 ```bash
-flutter run -v
+flutter doctor
+
+flutter run
 ```
 
 ## Contributors
 
 <table>
 <tr align="center">
-
-
 <td>
 
-Siddhartha Varma
+Siddhartha Varma (App)
 
 <p align="center">
 <img src = "https://avatars1.githubusercontent.com/u/39856034?s=400&u=b2f0ffe4ff639d4257db47e7268ed22e8aaf0221&v=4" width="150" height="150" alt="Siddhartha Varna">
 </p>
 <p align="center">
-<a href = "https://github.com/BRO3886"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
-<a href = "https://www.linkedin.com/in/siddharthav22/">
+<a href = "https://github.com/BRO3886" target="_blank"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
+<a href = "https://www.linkedin.com/in/siddharthav22/" target="_blank">
 <img src = "http://www.iconninja.com/files/863/607/751/network-linkedin-social-connection-circular-circle-media-icon.svg" width="36" height="36"/>
 </a>
 </p>
@@ -66,17 +66,19 @@ Siddhartha Varma
 Riddhi Gupta (Backend)
 
 <p align="center">
-<img src = "https://dscvit.com/images/dsc-logo-square.svg" width="150" height="150" alt="Your Name Here (Insert Your Image Link In Src">
+<img src = "https://avatars2.githubusercontent.com/u/43917576?s=460&u=b9ba679a93963e9dd0cc8b849dce4cfc26c4f24f&v=4" width="150" height="150" alt="Riddhi Gupta">
 </p>
 <p align="center">
-<a href = "https://github.com/person2"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
-<a href = "https://www.linkedin.com/in/person2">
+<a href = "https://github.com/RiddhiGupta5" target="_blank"><img src = "http://www.iconninja.com/files/241/825/211/round-collaboration-social-github-code-circle-network-icon.svg" width="36" height = "36"/></a>
+<a href = "https://www.linkedin.com/in/riddhi-gupta-6a587017a/" target="_blank">
 <img src = "http://www.iconninja.com/files/863/607/751/network-linkedin-social-connection-circular-circle-media-icon.svg" width="36" height="36"/>
 </a>
 </p>
 </td>
+
 </tr>
 </table>
+
 
 <br>
 <br>
