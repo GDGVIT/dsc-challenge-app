@@ -40,10 +40,10 @@
 ## Contributors
 
 <table>
-<tr align="center" style="margin 1em">
+<tr align="center">
 
 
-<td>
+<td  style="margin 1em;">
 
 John Doe
 
@@ -59,7 +59,7 @@ John Doe
 </td>
 
 
-<td>
+<td  style="margin 1em;">
 
 John Doe
 
@@ -76,7 +76,7 @@ John Doe
 
 
 
-<td>
+<td  style="margin 1em;">
 
 John Doe
 
