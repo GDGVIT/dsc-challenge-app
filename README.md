@@ -15,7 +15,7 @@
 - [ ]  Oauth login
 - [ ]  Randomly generate question from a pool of questions
 - [ ]  Leaderboard
-- [ ]  < insert functionality >
+- [ ]  Separate leaderboard for #30DaysOf<ML,Go,Flutter>
 
 <br>
 
