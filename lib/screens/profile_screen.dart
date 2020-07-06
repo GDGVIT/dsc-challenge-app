@@ -2,10 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../utils/global_themes.dart';
-import '../utils/global_themes.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routename = "/profile";
+
+  addEditInstaHandle(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      child: AlertDialog(
+        title: Text('Add/Edit Instagram Handle'),
+        content: TextField(
+          decoration: InputDecoration(
+            filled: true,
+            hintText: '@dscvitvellore',
+            hintStyle: TextStyle(
+              color: primaryColor,
+            ),
+            fillColor: primaryColor.withOpacity(0.2),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: borderRadius10,
+            ),
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('CANCEL'),
+            textColor: primaryColor,
+            onPressed: () => Navigator.maybePop(context),
+          ),
+          FlatButton(
+            child: Text('DONE'),
+            textColor: primaryColor,
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                   FlatButton(
                     child: Text('Edit'),
                     textColor: primaryColor,
-                    onPressed: () {},
+                    onPressed: () => addEditInstaHandle(context),
                   ),
                 ],
               ),

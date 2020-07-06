@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         buttonTheme: ButtonThemeData(
           disabledColor: disabledGrey,
           buttonColor: primaryColor,
-          // textTheme: ButtonTextTheme.primary,
+          // te1xtTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius10,
           ),
