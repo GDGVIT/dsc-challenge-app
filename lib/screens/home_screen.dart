@@ -1,8 +1,12 @@
-import 'package:daily_mcq/utils/global_themes.dart';
+import 'package:daily_mcq/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../utils/global_themes.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const routename = "/home";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +19,10 @@ class HomeScreen extends StatelessWidget {
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Row(
             children: <Widget>[
-              CircleAvatar(),
+              SvgPicture.asset(
+                "assets/images/dsc-logo-square.svg",
+                height: 48,
+              ),
               RichText(
                 text: TextSpan(
                   style: TextStyle(
@@ -34,8 +41,17 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              CircleAvatar(
-                radius: 30,
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(),
+                    fullscreenDialog: true,
+                  ),
+                ),
+                child: CircleAvatar(
+                  radius: 30,
+                ),
               ),
             ],
           ),
@@ -54,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                 elevation: 2.3,
                 child: InkWell(
                   borderRadius: borderRadius10,
-                  onTap: (){},
+                  onTap: () {},
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
@@ -66,10 +82,7 @@ class HomeScreen extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Leaderboard',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: boldHeading,
                         ),
                         SizedBox(
                           height: 10,
@@ -170,11 +183,51 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Card(),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: borderRadius10,
+                ),
+                elevation: 2.3,
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: borderRadius10,
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 48,
+                      horizontal: 32,
+                    ),
+                    child: Text(
+                      'Daily Challenge',
+                      style: boldHeading,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
-              Card(),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: borderRadius10,
+                ),
+                elevation: 2.3,
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: borderRadius10,
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 48,
+                      horizontal: 32,
+                    ),
+                    child: Text(
+                      'Weekly Challenge',
+                      style: boldHeading,
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),

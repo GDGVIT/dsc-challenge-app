@@ -1,6 +1,8 @@
-import 'package:daily_mcq/screens/home_screen.dart';
-import 'package:daily_mcq/utils/global_themes.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/home_screen.dart';
+import 'screens/profile_screen.dart';
+import 'utils/global_themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
         buttonTheme: ButtonThemeData(
           disabledColor: disabledGrey,
           buttonColor: primaryColor,
+          // textTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius10,
           ),
@@ -38,10 +41,13 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: canvasColor,
           elevation: 0,
-          
         ),
       ),
       home: HomeScreen(),
+      routes: {
+        HomeScreen.routename: (_) => HomeScreen(),
+        ProfileScreen.routename: (_) => ProfileScreen(),
+      },
     );
   }
 }
