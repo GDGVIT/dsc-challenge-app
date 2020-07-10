@@ -8,15 +8,14 @@
 
 ---
 [![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](INSERT_LINK_FOR_DOCS_HERE) 
-  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](INSERT_UI_LINK_HERE)
+  [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](https://xd.adobe.com/view/1909dc61-2bf0-45ef-4e38-03572cc381c0-6f38/)
 
 
 ## Functionalities
 - [ ]  Oauth login
 - [ ]  Randomly generate question from a pool of questions
 - [ ]  Leaderboard
-- [ ]  Separate leaderboard for #30DaysOf<ML,Go,Flutter>
-
+- [ ]  Add instagram username to carry forward points
 <br>
 
 
