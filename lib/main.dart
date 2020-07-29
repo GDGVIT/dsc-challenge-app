@@ -1,3 +1,5 @@
+import 'package:daily_mcq/screens/signup/instagram_handle.dart';
+import 'package:daily_mcq/screens/signup/signup_screen_goog.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/home_screen.dart';
@@ -42,9 +44,19 @@ class MyApp extends StatelessWidget {
           color: canvasColor,
           elevation: 0,
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: borderRadius10,
+            borderSide: BorderSide.none,
+          ),
+          fillColor: Colors.white,
+          filled: true,
+        ),
       ),
-      home: HomeScreen(),
+      home: SignupScreen(),
       routes: {
+        SignupScreen.routename: (_) => SignupScreen(),
+        AddInstagramHandleScreen.routename: (_) => AddInstagramHandleScreen(),
         HomeScreen.routename: (_) => HomeScreen(),
         ProfileScreen.routename: (_) => ProfileScreen(),
       },

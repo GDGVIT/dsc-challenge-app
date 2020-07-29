@@ -11,10 +11,16 @@ Color canvasColor = Color(0xfff2f2f2);
 Color disabledGrey = Color(0xffbbbbbb);
 
 BorderRadius borderRadius10 = BorderRadius.circular(10);
+BorderRadius borderRadiusButton = BorderRadius.circular(50);
 
 TextStyle boldHeading = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
+);
+
+TextStyle bigText = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
 );
 
 TextStyle greyText = TextStyle(

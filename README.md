@@ -28,9 +28,41 @@
 	-  VS Code (optional, but recommended)
 
 * directions to install
+
+1. First clone the Repository
 ```bash
 git clone https://github.com/GDGVIT/dsc-challenge-app.git
 ```
+
+2. In android/app/build.gradle, line 67
+```
+Uncomment  // signingConfig signingConfigs.debug
+Comment signingConfig signingConfigs.release
+```
+
+3. Create a [firebase]('https://firebase.google.com') project
+
+4. Create a new android project
+
+Add in the package name: ```com.dscvit.daily_mcq```
+
+It is recommened that you change the package name, just a quick search and replace on any IDE would do.
+
+Add in your debug key SHA1 when asked
+
+For getting debug key, on your terminal type:
+```bash
+keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android 
+```
+
+For getting debug key (Windows), on your command prompt type:
+```bash
+keytool -list -v -keystore 'c:/users/<YOUR USER NAME>/.android/debug.keystore' -alias androiddebugkey -storepass android -keypass android 
+```
+
+Follow the rest of the instructions, like downloading the ```google-services.json``` file, adding firebase SDK etc
+
+5. Run the app so that it communicates with Firebase
 
 * directions to execute
 
