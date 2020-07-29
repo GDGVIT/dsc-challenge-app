@@ -10,3 +10,6 @@ const String USER_EXSTS = "A user with these credentials already exists!";
 
 const String UNABLE_TO_LOGIN =
     "Unable to log you in with Google. Please try again later";
+
+const String INACTIVE_LOGOUT =
+    "You have been signed out due to inactivity. Login again to continue";
