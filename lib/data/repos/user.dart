@@ -20,14 +20,20 @@ class UserRepository {
         _googleSignIn = googleSignin ?? GoogleSignIn();
 
   Future<FirebaseUser> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    await _firebaseAuth.signInWithCredential(credential);
+    try {
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await _firebaseAuth.signInWithCredential(credential);
+    } on SocketException {
+      print("no internet");
+    } catch (e) {
+      print(e.toString());
+    }
     return _firebaseAuth.currentUser();
   }
 
@@ -50,7 +56,11 @@ class UserRepository {
   Future<ApiResponse<User>> login() async {
     try {
       final firebaseUser = await signInWithGoogle();
+      // if (firebaseUser == null) {
+      //   return ApiResponse.error("Uunable to login at the moment");
+      // }
       final token = await getUserToken();
+      print('token : ${token.token}');
 
       final response = await http.post(
         BASE_URL + LOGIN,

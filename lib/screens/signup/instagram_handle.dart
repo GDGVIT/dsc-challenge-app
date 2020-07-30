@@ -3,8 +3,17 @@ import 'package:daily_mcq/utils/global_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddInstagramHandleScreen extends StatelessWidget {
+class AddInstagramHandleScreen extends StatefulWidget {
   static const routename = "/add-insta";
+
+  @override
+  _AddInstagramHandleScreenState createState() =>
+      _AddInstagramHandleScreenState();
+}
+
+class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
+  final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +53,7 @@ class AddInstagramHandleScreen extends StatelessWidget {
           padding: EdgeInsets.all(32),
           // alignment: Alignment.center,
           child: Form(
+            key: _formkey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -79,7 +89,10 @@ class AddInstagramHandleScreen extends StatelessWidget {
                     FlatButton(
                       child: Text('Skip'),
                       textColor: primaryColor,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomeScreen.routename);
+                      },
                     ),
                     SizedBox(
                       width: 20,
@@ -87,8 +100,10 @@ class AddInstagramHandleScreen extends StatelessWidget {
                     RaisedButton(
                       child: Text('Continue'),
                       textColor: Colors.white,
-                      onPressed: () => Navigator.of(context)
-                          .pushReplacementNamed(HomeScreen.routename),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomeScreen.routename);
+                      },
                     ),
                   ],
                 ),
