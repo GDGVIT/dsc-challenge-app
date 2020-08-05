@@ -25,3 +25,8 @@ class Unauthenticated extends GooglesigninState {
   @override
   List<Object> get props => [];
 }
+
+class LoginLoading extends GooglesigninState {
+  @override
+  List<Object> get props => throw UnimplementedError();
+}

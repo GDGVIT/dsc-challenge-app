@@ -45,3 +45,4 @@ android/app/key.jks
 android/key.properties
 android/google-services.json
 android/app/google-services.json
+debug.keystore

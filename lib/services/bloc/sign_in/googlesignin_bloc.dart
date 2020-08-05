@@ -48,6 +48,7 @@ class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
   }
 
   Stream<GooglesigninState> _mapLoggedInToState() async* {
+    yield LoginLoading();
     final response = await _userRepository.login();
     switch (response.status) {
       case Status.LOADING:

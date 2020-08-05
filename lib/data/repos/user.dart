@@ -64,6 +64,9 @@ class UserRepository {
 
       final response = await http.post(
         BASE_URL + LOGIN,
+        headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
         body: jsonEncode({
           "id_token": token.token,
         }),
