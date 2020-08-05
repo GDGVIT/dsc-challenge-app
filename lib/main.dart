@@ -1,10 +1,10 @@
-import 'package:daily_mcq/screens/signup/instagram_handle.dart';
-import 'package:daily_mcq/screens/signup/signup_screen_goog.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/home_screen.dart';
-import 'screens/profile_screen.dart';
-import 'utils/global_themes.dart';
+import 'src/presentation/screens/home_screen.dart';
+import 'src/presentation/screens/profile_screen.dart';
+import 'src/presentation/screens/signup/instagram_handle.dart';
+import 'src/presentation/screens/signup/signup_screen_goog.dart';
+import 'src/utils/global_themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

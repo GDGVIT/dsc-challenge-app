@@ -1,9 +1,10 @@
-import 'package:daily_mcq/screens/signup/instagram_handle.dart';
-import 'package:daily_mcq/services/bloc/sign_in/googlesignin_bloc.dart';
-import 'package:daily_mcq/utils/global_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../services/bloc/sign_in/googlesignin_bloc.dart';
+import '../../../utils/global_themes.dart';
+import 'instagram_handle.dart';
 
 class SignupScreen extends StatelessWidget {
   static const routename = "/signup";

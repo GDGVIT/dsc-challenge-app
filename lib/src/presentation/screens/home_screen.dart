@@ -1,9 +1,9 @@
-import 'package:daily_mcq/screens/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../utils/global_themes.dart';
+import 'profile_screen.dart';
+import '../../utils/global_themes.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routename = "/home";

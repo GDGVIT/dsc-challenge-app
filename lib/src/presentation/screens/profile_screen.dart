@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../utils/global_themes.dart';
+import '../../utils/global_themes.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routename = "/profile";

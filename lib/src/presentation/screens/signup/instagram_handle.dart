@@ -1,7 +1,8 @@
-import 'package:daily_mcq/screens/home_screen.dart';
-import 'package:daily_mcq/utils/global_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../utils/global_themes.dart';
+import '../home_screen.dart';
 
 class AddInstagramHandleScreen extends StatefulWidget {
   static const routename = "/add-insta";
