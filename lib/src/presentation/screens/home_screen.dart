@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 import 'profile_screen.dart';
 import '../../utils/global_themes.dart';
@@ -19,10 +19,10 @@ class HomeScreen extends StatelessWidget {
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Row(
             children: <Widget>[
-              SvgPicture.asset(
-                "assets/images/dsc-logo-square.svg",
-                height: 48,
-              ),
+              // SvgPicture.asset(
+              //   "assets/images/dsc-logo-square.svg",
+              //   height: 48,
+              // ),
               RichText(
                 text: TextSpan(
                   style: TextStyle(

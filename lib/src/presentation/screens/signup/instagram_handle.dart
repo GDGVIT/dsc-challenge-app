@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/global_themes.dart';
 import '../home_screen.dart';
@@ -25,10 +25,10 @@ class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/dsc-logo-square.svg",
-              height: 48,
-            ),
+            // SvgPicture.asset(
+            //   "assets/images/dsc-logo-square.svg",
+            //   height: 48,
+            // ),
             RichText(
               text: TextSpan(
                 style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../../utils/global_themes.dart';
@@ -100,10 +100,10 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SvgPicture.asset(
-                "assets/images/dsc-logo-square.svg",
-                height: 108,
-              ),
+              // SvgPicture.asset(
+              //   "assets/images/dsc-logo-square.svg",
+              //   height: 108,
+              // ),
               SizedBox(
                 width: 20,
               ),

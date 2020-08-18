@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 import '../../services/constants.dart';
@@ -12,55 +12,43 @@ import '../../services/helpers/errors.dart';
 import '../models/user.dart';
 
 class UserRepository {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId:
+        '1010322422291-0baag24oc9bq29c70ff7a9fq1e6kql2d.apps.googleusercontent.com',
+    signInOption: SignInOption.standard,
+  );
 
-  UserRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignin ?? GoogleSignIn();
-
-  Future<FirebaseUser> signInWithGoogle() async {
+  Future<GoogleSignInAccount> signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      await _firebaseAuth.signInWithCredential(credential);
-    } on SocketException {
-      print("no internet");
+      print(googleUser.displayName);
+      return googleUser;
     } catch (e) {
-      print(e.toString());
+      print("Exception on google sign in ${e.toString()}");
     }
-    return _firebaseAuth.currentUser();
   }
 
   Future<void> signOut() async {
     return Future.wait([
-      _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
     ]);
   }
 
   Future<bool> isSignedIn() async {
-    final currentUser = await _firebaseAuth.currentUser();
-    return currentUser != null;
+    final signedInStatus = await _googleSignIn.isSignedIn();
+    return signedInStatus;
   }
 
-  Future<IdTokenResult> getUserToken() async {
-    return (await _firebaseAuth.currentUser()).getIdToken(refresh: false);
-  }
+  // Future<IdTokenResult> getUserToken() async {
+  //   return (await _firebaseAuth.currentUser()).getIdToken(refresh: false);
+  // }
 
   Future<ApiResponse<User>> login() async {
     try {
-      final firebaseUser = await signInWithGoogle();
-      // if (firebaseUser == null) {
-      //   return ApiResponse.error("Uunable to login at the moment");
-      // }
-      final token = await getUserToken();
-      print('token : ${token.token}');
+      final googleUser = await signInWithGoogle();
+      print(googleUser.displayName);
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final response = await http.post(
         BASE_URL + LOGIN,
@@ -68,7 +56,7 @@ class UserRepository {
           HttpHeaders.contentTypeHeader: "application/json",
         },
         body: jsonEncode({
-          "id_token": token.token,
+          "id_token": googleAuth.idToken,
         }),
       );
 
