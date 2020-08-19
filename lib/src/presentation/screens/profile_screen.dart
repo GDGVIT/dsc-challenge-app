@@ -1,3 +1,5 @@
+import 'package:daily_mcq/src/presentation/screens/signup/signup_screen_goog.dart';
+import 'package:daily_mcq/src/services/bloc/sign_in/googlesignin_bloc.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/svg.dart';
 
@@ -183,7 +185,11 @@ class ProfileScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(32),
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              GooglesigninBloc().add(Logout());
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  SignupScreen.routename, (route) => false);
+            },
             child: Container(
               height: 50,
               width: MediaQuery.of(context).size.width,

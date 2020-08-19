@@ -30,3 +30,16 @@ class LoginLoading extends GooglesigninState {
   @override
   List<Object> get props => throw UnimplementedError();
 }
+
+class InstaHandleUpdateSuccess extends GooglesigninState {
+  @override
+  List<Object> get props => [];
+}
+
+class InstaHandleUpdateFailed extends GooglesigninState {
+  final String message;
+
+  InstaHandleUpdateFailed({@required this.message});
+  @override
+  List<Object> get props => [];
+}

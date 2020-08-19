@@ -82,4 +82,49 @@ class UserRepository {
       return ApiResponse.error(EXCEPTION + "${e.toString()}");
     }
   }
+
+  Future<ApiResponse<bool>> updateInstaHandle(String handle) async {
+    if (handle.contains("@")) {
+      handle = handle.replaceAll("@", "").trim();
+    }
+
+    Box box = await Hive.openBox("userBox");
+    UserClass user = UserClass.fromJson(box.get("user"));
+    String token = box.get("user_token");
+
+    const url = BASE_URL + INSTA_HANDLE_UPDATE;
+
+    try {
+      final response = await http.patch(
+        url,
+        headers: {
+          HttpHeaders.authorizationHeader: "Token $token",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: jsonEncode({"insta_handle": handle}),
+      );
+
+      print("update insta handle ${response.statusCode}");
+
+      switch (response.statusCode) {
+        case 200:
+          user.instaHandle = handle;
+          box.put("user", user.toJson());
+          return ApiResponse.completed(true);
+          break;
+        case 401:
+          return ApiResponse.error(UNABLE_TO_LOGIN);
+          break;
+        default:
+          print("${jsonDecode(response.body)}");
+          return ApiResponse.error("Code ${response.statusCode}, $EXCEPTION");
+          break;
+      }
+    } on SocketException {
+      return ApiResponse.error(NO_INTERNET_CONNECTION);
+    } catch (e) {
+      print("update_insta exception : ${e.toString()}");
+      return ApiResponse.error(EXCEPTION + "${e.toString()}");
+    }
+  }
 }

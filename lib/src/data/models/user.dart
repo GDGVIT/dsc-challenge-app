@@ -42,7 +42,7 @@ class UserClass {
 
   String username;
   String email;
-  dynamic instaHandle;
+  String instaHandle;
   int platform;
 
   factory UserClass.fromJson(Map<String, dynamic> json) => UserClass(

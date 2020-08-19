@@ -28,6 +28,8 @@ class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
       yield* _mapLoggedInToState();
     } else if (event is Logout) {
       yield* _mapLoggedOutToState();
+    } else if (event is UpdateInstaHandle) {
+      yield* _mapUpdateInstaHandleToState(event.handle);
     }
   }
 
@@ -54,8 +56,8 @@ class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
         break;
       case Status.COMPLETED:
         final hiveInstance = await Hive.openBox('userBox');
-
-        hiveInstance.put('user', response.data.toJson());
+        hiveInstance.put("user_token", response.data.token);
+        hiveInstance.put('user', response.data.user.toJson());
         hiveInstance.put("logged_in", true);
 
         yield Authenticated(user: response.data);
@@ -69,5 +71,20 @@ class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
   Stream<GooglesigninState> _mapLoggedOutToState() async* {
     yield Unauthenticated(message: 'Logging Out');
     _userRepository.signOut();
+  }
+
+  Stream<GooglesigninState> _mapUpdateInstaHandleToState(String handle) async* {
+    yield LoginLoading();
+    final response = await _userRepository.updateInstaHandle(handle);
+    switch (response.status) {
+      case Status.LOADING:
+        break;
+      case Status.COMPLETED:
+        yield InstaHandleUpdateSuccess();
+        break;
+      case Status.ERROR:
+        yield InstaHandleUpdateFailed(message: response.message);
+        break;
+    }
   }
 }

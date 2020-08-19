@@ -18,3 +18,13 @@ class Logout extends GooglesigninEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateInstaHandle extends GooglesigninEvent {
+  final String handle;
+
+  UpdateInstaHandle({@required this.handle});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
