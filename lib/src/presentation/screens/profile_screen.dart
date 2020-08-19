@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import '../../utils/global_themes.dart';
 
@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
             fillColor: primaryColor.withOpacity(0.2),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: borderRadius10,
+              borderRadius: borderRadius8,
             ),
           ),
         ),
@@ -64,10 +64,10 @@ class ProfileScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/dsc-logo-square.svg",
-              height: 48,
-            ),
+            // SvgPicture.asset(
+            //   "assets/images/dsc-logo-square.svg",
+            //   height: 48,
+            // ),
             RichText(
               text: TextSpan(
                 style: TextStyle(
@@ -103,10 +103,10 @@ class ProfileScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 50,
                     backgroundColor: Colors.white,
-                    child: SvgPicture.asset(
-                      "assets/images/dsc-logo-square.svg",
-                      height: 100,
-                    ),
+                    // child: SvgPicture.asset(
+                    //   "assets/images/dsc-logo-square.svg",
+                    //   height: 100,
+                    // ),
                   ),
                   SizedBox(
                     width: 20,

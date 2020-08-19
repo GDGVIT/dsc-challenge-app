@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 import 'profile_screen.dart';
 import '../../utils/global_themes.dart';
@@ -19,10 +19,10 @@ class HomeScreen extends StatelessWidget {
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Row(
             children: <Widget>[
-              SvgPicture.asset(
-                "assets/images/dsc-logo-square.svg",
-                height: 48,
-              ),
+              // SvgPicture.asset(
+              //   "assets/images/dsc-logo-square.svg",
+              //   height: 48,
+              // ),
               RichText(
                 text: TextSpan(
                   style: TextStyle(
@@ -65,11 +65,11 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   onTap: () {},
                   child: Container(
                     alignment: Alignment.center,
@@ -185,12 +185,12 @@ class HomeScreen extends StatelessWidget {
               ),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
                   onTap: () {},
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
@@ -209,12 +209,12 @@ class HomeScreen extends StatelessWidget {
               ),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
                   onTap: () {},
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 import '../../services/constants.dart';
@@ -12,55 +12,40 @@ import '../../services/helpers/errors.dart';
 import '../models/user.dart';
 
 class UserRepository {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  UserRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignin})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
-        _googleSignIn = googleSignin ?? GoogleSignIn();
-
-  Future<FirebaseUser> signInWithGoogle() async {
+  Future<GoogleSignInAccount> signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      await _firebaseAuth.signInWithCredential(credential);
-    } on SocketException {
-      print("no internet");
+      print(googleUser.displayName);
+      return googleUser;
     } catch (e) {
-      print(e.toString());
+      print("Exception on google sign in ${e.toString()}");
     }
-    return _firebaseAuth.currentUser();
   }
 
   Future<void> signOut() async {
+    Hive.box("userBox").put("logged_in", false);
     return Future.wait([
-      _firebaseAuth.signOut(),
       _googleSignIn.signOut(),
     ]);
   }
 
   Future<bool> isSignedIn() async {
-    final currentUser = await _firebaseAuth.currentUser();
-    return currentUser != null;
-  }
-
-  Future<IdTokenResult> getUserToken() async {
-    return (await _firebaseAuth.currentUser()).getIdToken(refresh: false);
+    final signedInStatus = await _googleSignIn.isSignedIn();
+    return signedInStatus;
   }
 
   Future<ApiResponse<User>> login() async {
     try {
-      final firebaseUser = await signInWithGoogle();
-      // if (firebaseUser == null) {
-      //   return ApiResponse.error("Uunable to login at the moment");
-      // }
-      final token = await getUserToken();
-      print('token : ${token.token}');
+      final googleUser = await signInWithGoogle();
+      final hiveInstance = await Hive.openBox('userBox');
+
+      hiveInstance.put('photo_url', googleUser.photoUrl);
+      hiveInstance.put('display_name', googleUser.displayName);
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       final response = await http.post(
         BASE_URL + LOGIN,
@@ -68,7 +53,7 @@ class UserRepository {
           HttpHeaders.contentTypeHeader: "application/json",
         },
         body: jsonEncode({
-          "id_token": token.token,
+          "id_token": googleAuth.idToken,
         }),
       );
 
@@ -76,6 +61,7 @@ class UserRepository {
 
       switch (response.statusCode) {
         case 200:
+          print("${jsonDecode(response.body)}");
           return ApiResponse.completed(
             userFromJson(utf8.decode(response.bodyBytes)),
           );

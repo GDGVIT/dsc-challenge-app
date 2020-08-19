@@ -16,7 +16,6 @@ part 'googlesignin_state.dart';
 class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
   GooglesigninBloc() : super(Initial());
 
-  //TODO: add firebase auth and google sign in
   final UserRepository _userRepository = UserRepository();
 
   @override
@@ -57,6 +56,7 @@ class GooglesigninBloc extends Bloc<GooglesigninEvent, GooglesigninState> {
         final hiveInstance = await Hive.openBox('userBox');
 
         hiveInstance.put('user', response.data.toJson());
+        hiveInstance.put("logged_in", true);
 
         yield Authenticated(user: response.data);
         break;

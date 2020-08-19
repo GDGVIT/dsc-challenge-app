@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import '../../../utils/global_themes.dart';
 import '../home_screen.dart';
@@ -20,15 +20,16 @@ class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).canvasColor,
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/dsc-logo-square.svg",
-              height: 48,
-            ),
+            // SvgPicture.asset(
+            //   "assets/images/dsc-logo-square.svg",
+            //   height: 48,
+            // ),
             RichText(
               text: TextSpan(
                 style: TextStyle(
@@ -68,7 +69,7 @@ class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: '@username',
+                    hintText: ' @username',
                     contentPadding: EdgeInsets.all(8),
                     prefixIconConstraints: BoxConstraints.tight(Size(24, 24)),
                     prefixIcon: Padding(
