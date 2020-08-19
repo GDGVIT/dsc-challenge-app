@@ -12,11 +12,7 @@ import '../../services/helpers/errors.dart';
 import '../models/user.dart';
 
 class UserRepository {
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    clientId:
-        '1010322422291-0baag24oc9bq29c70ff7a9fq1e6kql2d.apps.googleusercontent.com',
-    signInOption: SignInOption.standard,
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<GoogleSignInAccount> signInWithGoogle() async {
     try {
@@ -29,6 +25,7 @@ class UserRepository {
   }
 
   Future<void> signOut() async {
+    Hive.box("userBox").put("logged_in", false);
     return Future.wait([
       _googleSignIn.signOut(),
     ]);
@@ -39,14 +36,14 @@ class UserRepository {
     return signedInStatus;
   }
 
-  // Future<IdTokenResult> getUserToken() async {
-  //   return (await _firebaseAuth.currentUser()).getIdToken(refresh: false);
-  // }
-
   Future<ApiResponse<User>> login() async {
     try {
       final googleUser = await signInWithGoogle();
-      print(googleUser.displayName);
+      final hiveInstance = await Hive.openBox('userBox');
+
+      hiveInstance.put('photo_url', googleUser.photoUrl);
+      hiveInstance.put('display_name', googleUser.displayName);
+
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
@@ -64,6 +61,7 @@ class UserRepository {
 
       switch (response.statusCode) {
         case 200:
+          print("${jsonDecode(response.body)}");
           return ApiResponse.completed(
             userFromJson(utf8.decode(response.bodyBytes)),
           );

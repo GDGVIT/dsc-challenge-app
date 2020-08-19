@@ -65,11 +65,11 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   onTap: () {},
                   child: Container(
                     alignment: Alignment.center,
@@ -185,12 +185,12 @@ class HomeScreen extends StatelessWidget {
               ),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
                   onTap: () {},
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
@@ -209,12 +209,12 @@ class HomeScreen extends StatelessWidget {
               ),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                 ),
                 elevation: 2.3,
                 child: InkWell(
                   onTap: () {},
-                  borderRadius: borderRadius10,
+                  borderRadius: borderRadius8,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(

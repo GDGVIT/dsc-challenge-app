@@ -1,3 +1,4 @@
+import 'package:daily_mcq/src/presentation/widgets/my_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -45,19 +46,8 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
             // cubit: _googlesigninBloc,
             listener: (context, state) {
           if (state is Authenticated) {
-            final snackbar = SnackBar(
-              elevation: 0.5,
-              content: Text(
-                'Login Successful',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: primaryColor,
-            );
-            Scaffold.of(context).showSnackBar(snackbar);
+            Scaffold.of(context)
+                .showSnackBar(getMySnackBar("Login Successful"));
             Future.delayed(
               Duration(seconds: 1),
               () => Navigator.of(context)

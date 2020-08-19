@@ -20,6 +20,7 @@ class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).canvasColor,
         centerTitle: true,
         title: Row(
@@ -68,7 +69,7 @@ class _AddInstagramHandleScreenState extends State<AddInstagramHandleScreen> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: '@username',
+                    hintText: ' @username',
                     contentPadding: EdgeInsets.all(8),
                     prefixIconConstraints: BoxConstraints.tight(Size(24, 24)),
                     prefixIcon: Padding(

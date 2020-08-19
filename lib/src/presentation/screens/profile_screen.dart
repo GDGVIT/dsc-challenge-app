@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
             fillColor: primaryColor.withOpacity(0.2),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius: borderRadius10,
+              borderRadius: borderRadius8,
             ),
           ),
         ),
