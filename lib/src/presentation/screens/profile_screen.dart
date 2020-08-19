@@ -1,47 +1,38 @@
-import 'package:daily_mcq/src/presentation/screens/signup/signup_screen_goog.dart';
-import 'package:daily_mcq/src/services/bloc/sign_in/googlesignin_bloc.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 
+import '../../data/models/user.dart';
+import '../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../utils/global_themes.dart';
+import '../widgets/my_snackbar.dart';
+import 'signup/signup_screen_goog.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routename = "/profile";
-
-  addEditInstaHandle(BuildContext context) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      child: AlertDialog(
-        title: Text('Add/Edit Instagram Handle'),
-        content: TextField(
-          decoration: InputDecoration(
-            filled: true,
-            hintText: '@dscvitvellore',
-            hintStyle: TextStyle(
-              color: primaryColor,
-            ),
-            fillColor: primaryColor.withOpacity(0.2),
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: borderRadius8,
-            ),
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('CANCEL'),
-            textColor: primaryColor,
-            onPressed: () => Navigator.maybePop(context),
-          ),
-          FlatButton(
-            child: Text('DONE'),
-            textColor: primaryColor,
-            onPressed: () {},
-          ),
-        ],
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => GooglesigninBloc(),
+      child: ProfileScreenBuilder(),
     );
+  }
+}
+
+class ProfileScreenBuilder extends StatefulWidget {
+  @override
+  _ProfileScreenBuilderState createState() => _ProfileScreenBuilderState();
+}
+
+class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
+  UserClass user = UserClass.fromJson(Hive.box("userBox").get("user"));
+  bool loading = false;
+  TextEditingController _instaHandle;
+  @override
+  void initState() {
+    _instaHandle = TextEditingController(text: user.instaHandle);
+    super.initState();
   }
 
   @override
@@ -66,10 +57,10 @@ class ProfileScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // SvgPicture.asset(
-            //   "assets/images/dsc-logo-square.svg",
-            //   height: 48,
-            // ),
+            SvgPicture.asset(
+              "assets/images/dsc-logo-square.svg",
+              height: 48,
+            ),
             RichText(
               text: TextSpan(
                 style: TextStyle(
@@ -97,85 +88,111 @@ class ProfileScreen extends StatelessWidget {
             horizontal: 32,
             vertical: 32,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.white,
-                    // child: SvgPicture.asset(
-                    //   "assets/images/dsc-logo-square.svg",
-                    //   height: 100,
-                    // ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Siddhartha Varma',
-                          overflow: TextOverflow.ellipsis,
-                          style: boldHeading.copyWith(
-                            fontWeight: FontWeight.w500,
+          child: BlocListener<GooglesigninBloc, GooglesigninState>(
+            listener: (context, state) {
+              if (state is LoginLoading) {
+                setState(() {
+                  loading = true;
+                });
+              } else if (state is InstaHandleUpdateSuccess) {
+                Scaffold.of(context)
+                    .showSnackBar(getMySnackBar("Insta handle updated"));
+                setState(() {
+                  loading = false;
+                  user = UserClass.fromJson(Hive.box("userBox").get("user"));
+                });
+              } else if (state is InstaHandleUpdateFailed) {
+                Scaffold.of(context).showSnackBar(getMySnackBar(
+                  "Something went wrong",
+                  color: Colors.red,
+                ));
+                setState(() {
+                  loading = false;
+                });
+              }
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Hero(
+                      tag: "profile_pic",
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage:
+                            NetworkImage(Hive.box("userBox").get("photo_url")),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            '${user.username}',
+                            overflow: TextOverflow.ellipsis,
+                            style: boldHeading.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text('Score: 000')
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text('Score: 000')
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Email: siddverma999@gmail.com",
-                style: greyText,
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Text(
-                "Leaderboard: 0",
-                style: greyText,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    child: Text(
-                      "Instagram: @handledfnkdnfsdfnsklnfskldnkld",
-                      style: greyText,
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Email: ${user.email}",
+                  style: greyText,
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  "Leaderboard: 0",
+                  style: greyText,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: Text(
+                        "Instagram: @${user.instaHandle ?? ""}",
+                        style: greyText,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  FlatButton(
-                    child: Text('Edit'),
-                    textColor: primaryColor,
-                    onPressed: () => addEditInstaHandle(context),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-            ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    (loading)
+                        ? CircularProgressIndicator()
+                        : FlatButton(
+                            child: Text('Edit'),
+                            textColor: primaryColor,
+                            onPressed: () => addEditInstaHandle(context),
+                          ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -200,6 +217,63 @@ class ProfileScreen extends StatelessWidget {
             elevation: 0,
           ),
         ),
+      ),
+    );
+  }
+
+  addEditInstaHandle(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      child: AlertDialog(
+        title: Text('Add/Edit Instagram Handle'),
+        content: TextField(
+          controller: _instaHandle,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: '@dscvitvellore',
+            hintStyle: TextStyle(
+              color: Colors.grey,
+            ),
+            fillColor: Colors.grey[100],
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: borderRadius8,
+            ),
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(
+              'CANCEL',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            textColor: primaryColor,
+            onPressed: () => Navigator.maybePop(context),
+          ),
+          FlatButton(
+            child: Text(
+              'DONE',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            textColor: primaryColor,
+            onPressed: () {
+              setState(() {
+                loading = true;
+              });
+              BlocProvider.of<GooglesigninBloc>(context).add(
+                UpdateInstaHandle(
+                  handle: _instaHandle.text,
+                ),
+              );
+              Navigator.maybePop(context);
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,10 +1,10 @@
-import 'package:daily_mcq/src/presentation/widgets/my_snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../../utils/global_themes.dart';
+import '../../widgets/my_snackbar.dart';
 import '../home_screen.dart';
 
 class AddInstagramHandleScreen extends StatelessWidget {
@@ -47,10 +47,10 @@ class _InstaBuilderScreenState extends State<InstaBuilderScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // SvgPicture.asset(
-              //   "assets/images/dsc-logo-square.svg",
-              //   height: 48,
-              // ),
+              SvgPicture.asset(
+                "assets/images/dsc-logo-square.svg",
+                height: 48,
+              ),
               RichText(
                 text: TextSpan(
                   style: TextStyle(

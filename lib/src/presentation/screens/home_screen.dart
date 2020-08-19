@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 
-import 'profile_screen.dart';
 import '../../utils/global_themes.dart';
+import '../widgets/show_up.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routename = "/home";
@@ -19,10 +21,10 @@ class HomeScreen extends StatelessWidget {
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Row(
             children: <Widget>[
-              // SvgPicture.asset(
-              //   "assets/images/dsc-logo-square.svg",
-              //   height: 48,
-              // ),
+              SvgPicture.asset(
+                "assets/images/dsc-logo-square.svg",
+                height: 48,
+              ),
               RichText(
                 text: TextSpan(
                   style: TextStyle(
@@ -49,8 +51,13 @@ class HomeScreen extends StatelessWidget {
                     fullscreenDialog: true,
                   ),
                 ),
-                child: CircleAvatar(
-                  radius: 30,
+                child: Hero(
+                  tag: "profile_pic",
+                  child: CircleAvatar(
+                    // radius: 30,
+                    backgroundImage:
+                        NetworkImage(Hive.box("userBox").get("photo_url")),
+                  ),
                 ),
               ),
             ],
@@ -58,124 +65,128 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius8,
-                ),
-                elevation: 2.3,
-                child: InkWell(
-                  borderRadius: borderRadius8,
-                  onTap: () {},
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 16,
-                      horizontal: 32,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Leaderboard',
-                          style: boldHeading,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('1'),
-                              ],
-                            ),
-                            Text('Lorem'),
-                            Text('100'),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('1'),
-                              ],
-                            ),
-                            Text('Lorem'),
-                            Text('100'),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('1'),
-                              ],
-                            ),
-                            Text('Lorem'),
-                            Text('100'),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('1'),
-                              ],
-                            ),
-                            Text('Lorem'),
-                            Text('100'),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
+              ShowUp(
+                delay: Duration(milliseconds: 200),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: borderRadius8,
+                  ),
+                  elevation: 2.3,
+                  child: InkWell(
+                    borderRadius: borderRadius8,
+                    onTap: () {},
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 32,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Leaderboard',
+                            style: boldHeading,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('1'),
+                                ],
+                              ),
+                              Text('Lorem'),
+                              Text('100'),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('1'),
+                                ],
+                              ),
+                              Text('Lorem'),
+                              Text('100'),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('1'),
+                                ],
+                              ),
+                              Text('Lorem'),
+                              Text('100'),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('1'),
+                                ],
+                              ),
+                              Text('Lorem'),
+                              Text('100'),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -183,23 +194,26 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius8,
-                ),
-                elevation: 2.3,
-                child: InkWell(
-                  onTap: () {},
-                  borderRadius: borderRadius8,
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 48,
-                      horizontal: 32,
-                    ),
-                    child: Text(
-                      'Daily Challenge',
-                      style: boldHeading,
+              ShowUp(
+                delay: Duration(milliseconds: 300),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: borderRadius8,
+                  ),
+                  elevation: 2.3,
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: borderRadius8,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 48,
+                        horizontal: 32,
+                      ),
+                      child: Text(
+                        'Daily Challenge',
+                        style: boldHeading,
+                      ),
                     ),
                   ),
                 ),
@@ -207,23 +221,26 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius8,
-                ),
-                elevation: 2.3,
-                child: InkWell(
-                  onTap: () {},
-                  borderRadius: borderRadius8,
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 48,
-                      horizontal: 32,
-                    ),
-                    child: Text(
-                      'Weekly Challenge',
-                      style: boldHeading,
+              ShowUp(
+                delay: Duration(milliseconds: 400),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: borderRadius8,
+                  ),
+                  elevation: 2.3,
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: borderRadius8,
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 48,
+                        horizontal: 32,
+                      ),
+                      child: Text(
+                        'Weekly Challenge',
+                        style: boldHeading,
+                      ),
                     ),
                   ),
                 ),

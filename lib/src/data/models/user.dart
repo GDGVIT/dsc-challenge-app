@@ -45,7 +45,7 @@ class UserClass {
   String instaHandle;
   int platform;
 
-  factory UserClass.fromJson(Map<String, dynamic> json) => UserClass(
+  factory UserClass.fromJson(Map<dynamic, dynamic> json) => UserClass(
         username: json["username"],
         email: json["email"],
         instaHandle: json["insta_handle"],
