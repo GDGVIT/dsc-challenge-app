@@ -1,3 +1,4 @@
+import 'package:daily_mcq/src/presentation/screens/daily_challenge/new_challenge.dart';
 import 'package:daily_mcq/src/presentation/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         AddInstagramHandleScreen.routename: (_) => AddInstagramHandleScreen(),
         HomeScreen.routename: (_) => HomeScreen(),
         ProfileScreen.routename: (_) => ProfileScreen(),
+        NewDailyChallengeScreen.routename: (_) => NewDailyChallengeScreen(),
       },
     );
   }

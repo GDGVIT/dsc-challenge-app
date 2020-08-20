@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 
 import '../../data/models/user.dart';
 import '../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../utils/global_themes.dart';
+import '../widgets/dsc_title.dart';
 import '../widgets/my_snackbar.dart';
 import 'signup/signup_screen_goog.dart';
 
@@ -53,33 +53,7 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
             onPressed: () => Navigator.maybePop(context),
           )
         ],
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/dsc-logo-square.svg",
-              height: 48,
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 24,
-                ),
-                children: [
-                  TextSpan(text: 'DSC '),
-                  TextSpan(
-                    text: 'VIT',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        title: DscTitleWidget(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -278,3 +252,4 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
     );
   }
 }
+

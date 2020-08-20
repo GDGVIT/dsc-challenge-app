@@ -42,6 +42,35 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ShowUp(
+        delay: Duration(milliseconds: 100),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(
+              "assets/images/dsc-logo-square.svg",
+              height: 48,
+            ),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 24,
+                ),
+                children: [
+                  TextSpan(text: 'DSC '),
+                  TextSpan(
+                    text: 'VIT',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: BlocConsumer<GooglesigninBloc, GooglesigninState>(
             // cubit: _googlesigninBloc,
@@ -89,8 +118,8 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ShowUp(
-            delay: Duration(milliseconds: 100),
-            child: Row(
+            delay: Duration(milliseconds: 200),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SvgPicture.asset(
@@ -98,7 +127,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
                   height: 108,
                 ),
                 SizedBox(
-                  width: 20,
+                  height: 20,
                 ),
                 RichText(
                   text: TextSpan(
@@ -107,13 +136,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
                       fontSize: 36,
                     ),
                     children: [
-                      TextSpan(text: 'DSC '),
-                      TextSpan(
-                        text: 'VIT',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      TextSpan(text: 'Daily Challenges'),
                     ],
                   ),
                 ),
@@ -121,10 +144,10 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 30,
           ),
           ShowUp(
-            delay: Duration(milliseconds: 100),
+            delay: Duration(milliseconds: 300),
             child: Text(
               'LOGIN',
               style: TextStyle(
@@ -137,7 +160,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
             height: 30,
           ),
           ShowUp(
-            delay: Duration(milliseconds: 100),
+            delay: Duration(milliseconds: 400),
             child: (state is LoginLoading)
                 ? Center(
                     child: LinearProgressIndicator(),

@@ -1,3 +1,5 @@
+import 'package:daily_mcq/src/presentation/screens/daily_challenge/new_challenge.dart';
+import 'package:daily_mcq/src/presentation/widgets/dsc_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,27 +23,7 @@ class HomeScreen extends StatelessWidget {
               EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
           child: Row(
             children: <Widget>[
-              SvgPicture.asset(
-                "assets/images/dsc-logo-square.svg",
-                height: 48,
-              ),
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 24,
-                  ),
-                  children: [
-                    TextSpan(text: 'DSC '),
-                    TextSpan(
-                      text: 'VIT',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              DscTitleWidget(),
               Spacer(),
               GestureDetector(
                 onTap: () => Navigator.push(
@@ -196,23 +178,29 @@ class HomeScreen extends StatelessWidget {
               ),
               ShowUp(
                 delay: Duration(milliseconds: 300),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: borderRadius8,
-                  ),
-                  elevation: 2.3,
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: borderRadius8,
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 48,
-                        horizontal: 32,
-                      ),
-                      child: Text(
-                        'Daily Challenge',
-                        style: boldHeading,
+                child: Hero(
+                  tag: 'daily_challenge_new',
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: borderRadius8,
+                    ),
+                    elevation: 2.3,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(NewDailyChallengeScreen.routename);
+                      },
+                      borderRadius: borderRadius8,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 48,
+                          horizontal: 32,
+                        ),
+                        child: Text(
+                          'Daily Challenge',
+                          style: boldHeading,
+                        ),
                       ),
                     ),
                   ),
