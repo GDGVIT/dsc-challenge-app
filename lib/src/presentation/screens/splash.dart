@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 import 'home_screen.dart';
@@ -13,6 +14,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     checkLogin();
+    setState(() {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ));
+    });
     super.initState();
   }
 
