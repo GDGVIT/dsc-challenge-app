@@ -7,6 +7,7 @@ import '../widgets/dsc_title.dart';
 import '../widgets/show_up.dart';
 import 'daily_challenge/new_challenge.dart';
 import 'profile_screen.dart';
+import 'weekly_challenge/new_challenge.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routename = "/home";
@@ -210,23 +211,29 @@ class HomeScreen extends StatelessWidget {
               ),
               ShowUp(
                 delay: Duration(milliseconds: 400),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: borderRadius8,
-                  ),
-                  elevation: 2.3,
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: borderRadius8,
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 48,
-                        horizontal: 32,
-                      ),
-                      child: Text(
-                        'Weekly Challenge',
-                        style: boldHeading,
+                child: Hero(
+                  tag: 'weekly_challenge_new',
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: borderRadius8,
+                    ),
+                    elevation: 2.3,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(NewWeeklyChallengeScreen.routename);
+                      },
+                      borderRadius: borderRadius8,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 48,
+                          horizontal: 32,
+                        ),
+                        child: Text(
+                          'Weekly Challenge',
+                          style: boldHeading,
+                        ),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:daily_mcq/src/presentation/screens/daily_challenge/new_challenge.dart';
 import 'package:daily_mcq/src/presentation/screens/splash.dart';
+import 'package:daily_mcq/src/presentation/screens/weekly_challenge/new_challenge.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routename: (_) => HomeScreen(),
         ProfileScreen.routename: (_) => ProfileScreen(),
         NewDailyChallengeScreen.routename: (_) => NewDailyChallengeScreen(),
+        NewWeeklyChallengeScreen.routename: (_) => NewWeeklyChallengeScreen(),
       },
     );
   }
