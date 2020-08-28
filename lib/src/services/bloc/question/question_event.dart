@@ -9,8 +9,18 @@ abstract class QuestionEvent extends Equatable {
 
 class GetDailyQuestion extends QuestionEvent {}
 
-class PostDailyQuestion extends QuestionEvent {}
-
 class GetWeeklyQuestion extends QuestionEvent {}
 
-class PostWeeklyQuestion extends QuestionEvent {}
+class PostQuestion extends QuestionEvent {
+  final QuestionType questionType;
+  final int id;
+  final String answer;
+  final String description;
+
+  PostQuestion({
+    @required this.questionType,
+    @required this.id,
+    @required this.answer,
+    this.description,
+  });
+}

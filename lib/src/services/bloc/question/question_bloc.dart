@@ -22,6 +22,39 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       yield* _mapGetDailyQuestionToState();
     } else if (event is GetWeeklyQuestion) {
       yield* _mapGetWeelyQuestionToState();
+    } else if (event is PostQuestion) {
+      yield* _mapPostQuestionToState(
+        questionType: event.questionType,
+        id: event.id,
+        answer: event.answer,
+        description: event.description,
+      );
+    }
+  }
+
+  Stream<QuestionState> _mapPostQuestionToState({
+    @required QuestionType questionType,
+    @required int id,
+    @required String answer,
+    String description,
+  }) async* {
+    yield QuestionLoading();
+    final response = await QuestionRepository.submitAnswer(
+      questionType: questionType,
+      id: id,
+      answer: answer,
+      description: description,
+    );
+
+    switch (response.status) {
+      case Status.LOADING:
+        break;
+      case Status.COMPLETED:
+        yield PostQuestionSuccess();
+        break;
+      case Status.ERROR:
+        yield PostQuestionFailure(message: response.message);
+        break;
     }
   }
 

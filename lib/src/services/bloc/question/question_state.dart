@@ -34,3 +34,11 @@ class GetWeeklyQuestionError extends QuestionState {
 
   GetWeeklyQuestionError({@required this.message});
 }
+
+class PostQuestionSuccess extends QuestionState {}
+
+class PostQuestionFailure extends QuestionState {
+  final String message;
+
+  PostQuestionFailure({@required this.message});
+}

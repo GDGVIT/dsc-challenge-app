@@ -82,7 +82,7 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
               } else if (state is InstaHandleUpdateFailed) {
                 Scaffold.of(context).showSnackBar(getMySnackBar(
                   "Something went wrong",
-                  color: Colors.red,
+                  color: Colors.redAccent,
                 ));
                 setState(() {
                   loading = false;

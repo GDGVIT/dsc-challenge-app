@@ -66,7 +66,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
           Future.delayed(Duration(seconds: 2), () {
             Scaffold.of(context).showSnackBar(getMySnackBar(
               state.message,
-              color: Colors.red,
+              color: Colors.redAccent,
             ));
           });
           return buildLoading(context);

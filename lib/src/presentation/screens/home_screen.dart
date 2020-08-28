@@ -155,7 +155,7 @@ class _HomescreenBuilderState extends State<HomescreenBuilder> {
                               } else if (state is LeaderboardError) {
                                 Scaffold.of(context).showSnackBar(getMySnackBar(
                                   state.message,
-                                  color: Colors.red,
+                                  color: Colors.redAccent,
                                 ));
                               }
                               return Center(

@@ -91,7 +91,7 @@ class _InstaBuilderScreenState extends State<InstaBuilderScreen> {
             } else if (state is InstaHandleUpdateFailed) {
               Scaffold.of(context).showSnackBar(getMySnackBar(
                 "Something went wrong",
-                color: Colors.red,
+                color: Colors.redAccent,
               ));
               setState(() {
                 disabled = false;
