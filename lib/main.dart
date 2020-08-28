@@ -15,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
-  await Hive.openBox("user");
+  await Hive.openBox("userBox");
   runApp(MyApp());
 }
 
