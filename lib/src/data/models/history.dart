@@ -1,26 +1,27 @@
 // To parse this JSON data, do
 //
-//     final history = historyFromMap(jsonString);
+//     final questionHistory = questionHistoryFromMap(jsonString);
 
 import 'dart:convert';
 
-History historyFromMap(String str) => History.fromMap(json.decode(str));
+QuestionHistory questionHistoryFromMap(String str) =>
+    QuestionHistory.fromMap(json.decode(str));
 
-String historyToMap(History data) => json.encode(data.toMap());
+String questionHistoryToMap(QuestionHistory data) => json.encode(data.toMap());
 
-class History {
-  History({
+class QuestionHistory {
+  QuestionHistory({
     this.message,
     this.history,
   });
 
   String message;
-  List<HistoryElement> history;
+  List<History> history;
 
-  factory History.fromMap(Map<String, dynamic> json) => History(
+  factory QuestionHistory.fromMap(Map<String, dynamic> json) => QuestionHistory(
         message: json["message"],
-        history: List<HistoryElement>.from(
-            json["history"].map((x) => HistoryElement.fromMap(x))),
+        history:
+            List<History>.from(json["history"].map((x) => History.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
@@ -29,8 +30,8 @@ class History {
       };
 }
 
-class HistoryElement {
-  HistoryElement({
+class History {
+  History({
     this.question,
     this.displayDate,
     this.yourAnswer,
@@ -43,10 +44,10 @@ class HistoryElement {
   DateTime displayDate;
   String yourAnswer;
   String correctAnswer;
-  int marks;
+  double marks;
   int questionType;
 
-  factory HistoryElement.fromMap(Map<String, dynamic> json) => HistoryElement(
+  factory History.fromMap(Map<String, dynamic> json) => History(
         question: json["question"],
         displayDate: DateTime.parse(json["display_date"]),
         yourAnswer: json["your_answer"],

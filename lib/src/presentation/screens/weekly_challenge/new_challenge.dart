@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../data/models/question.dart';
 import '../../../data/repos/question.dart';
@@ -24,6 +25,7 @@ class NewWeeklyChallengeScreen extends StatelessWidget {
           title: DscTitleWidget(),
           actions: [
             IconButton(
+              color: primaryColor,
               icon: Icon(Icons.history),
               onPressed: () {},
             ),
@@ -154,10 +156,35 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                             ),
                           ),
                         ),
-                        Text(
-                          "${question.question.questionBody}",
-                          style: greyText.copyWith(
-                            color: Colors.grey,
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              // border: Border.all(color: Colors.grey),
+                              color: Colors.grey[100],
+                            ),
+                            child: Text(
+                              // "",
+                              "${DateFormat.yMMMEd().format(question.question.displayDate)}",
+                              style: greyText,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "${question.question.questionBody}",
+                            style: greyText.copyWith(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -263,6 +290,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState.validate()) {
+                                      FocusScope.of(context).unfocus();
                                       setState(() {
                                         _loading = true;
                                       });

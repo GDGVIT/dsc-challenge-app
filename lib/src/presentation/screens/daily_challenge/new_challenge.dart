@@ -1,9 +1,11 @@
-import 'package:daily_mcq/src/data/repos/question.dart';
+import 'package:daily_mcq/src/presentation/screens/history.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../data/models/question.dart';
+import '../../../data/repos/question.dart';
 import '../../../services/bloc/question/question_bloc.dart';
 import '../../../utils/global_themes.dart';
 import '../../widgets/dsc_title.dart';
@@ -24,8 +26,15 @@ class NewDailyChallengeScreen extends StatelessWidget {
           title: DscTitleWidget(),
           actions: [
             IconButton(
+              color: primaryColor,
               icon: Icon(Icons.history),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return HistoryScreen(QuestionType.Daily);
+                  },
+                ));
+              },
             ),
           ],
         ),
@@ -155,10 +164,35 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
                             ),
                           ),
                         ),
-                        Text(
-                          "${question.question.questionBody}",
-                          style: greyText.copyWith(
-                            color: Colors.grey,
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              // border: Border.all(color: Colors.grey),
+                              color: Colors.grey[100],
+                            ),
+                            child: Text(
+                              // "",
+                              "${DateFormat.yMMMEd().format(question.question.displayDate)}",
+                              style: greyText,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "${question.question.questionBody}",
+                            style: greyText.copyWith(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -272,6 +306,7 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState.validate()) {
+                                      FocusScope.of(context).unfocus();
                                       setState(() {
                                         _loading = true;
                                       });

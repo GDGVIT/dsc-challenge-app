@@ -10,4 +10,6 @@ const DAILY_QUESTION = "daily_question/";
 
 const WEEKLY_QUESTION = "weekly_question/";
 
-const LEADERBOARD = "leaderboard";
+const LEADERBOARD = "leaderboard/";
+
+const HISTORY = "history_view/";

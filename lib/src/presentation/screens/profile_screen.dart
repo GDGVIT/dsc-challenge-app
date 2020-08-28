@@ -120,7 +120,6 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text('Score: 000')
                         ],
                       ),
                     ),
@@ -131,13 +130,6 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                 ),
                 Text(
                   "Email: ${user.email}",
-                  style: greyText,
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Leaderboard: 0",
                   style: greyText,
                 ),
                 SizedBox(
