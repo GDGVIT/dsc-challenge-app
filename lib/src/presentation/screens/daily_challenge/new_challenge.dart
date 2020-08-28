@@ -1,157 +1,357 @@
-import 'package:daily_mcq/src/presentation/widgets/dsc_title.dart';
-import 'package:daily_mcq/src/utils/global_themes.dart';
+import 'package:daily_mcq/src/data/models/question.dart';
+import 'package:daily_mcq/src/presentation/widgets/my_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../services/bloc/question/question_bloc.dart';
+import '../../../utils/global_themes.dart';
+import '../../widgets/dsc_title.dart';
 
 class NewDailyChallengeScreen extends StatelessWidget {
   static const routename = "/new-daily-challenge";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          color: primaryColor,
+    return BlocProvider(
+      create: (context) => QuestionBloc(),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: BackButton(
+            color: primaryColor,
+          ),
+          elevation: 0,
+          title: DscTitleWidget(),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.history),
+              onPressed: () {},
+            ),
+          ],
         ),
-        elevation: 0,
-        title: DscTitleWidget(),
+        body: NewDailyChallengeBuilder(),
       ),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.all(16),
-          padding: EdgeInsets.all(16),
-          child: Hero(
-            tag: 'daily_challenge_new',
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: borderRadius8.add(BorderRadius.circular(3)),
-              ),
-              elevation: 2.3,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: CupertinoScrollbar(
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.all(20),
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Daily Challenge',
-                          style: boldHeading,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Question',
-                            style: boldHeading.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh sit amet commodo nulla. Egestas diam in arcu cursus euismod quis viverra. Turpis cursus in hac habitasse. Vulputate ut pharetra sit amet aliquam. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Est sit amet facilisis magna etiam tempor. Vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Nunc non blandit massa enim nec dui nunc mattis. Sit amet massa vitae tortor. Lobortis elementum nibh tellus molestie nunc. Sed augue lacus viverra vitae congue eu consequat. Massa eget egestas purus viverra accumsan in. Proin fermentum leo vel orci porta non pulvinar neque laoreet. Tempus imperdiet nulla malesuada pellentesque elit eget gravida. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget. Nisl tincidunt eget nullam non nisi. Fermentum leo vel orci porta non pulvinar neque laoreet suspendisse. Orci eu lobortis elementum nibh tellus.
+    );
+  }
+}
 
-Dignissim sodales ut eu sem. Sapien pellentesque habitant morbi tristique senectus et. Euismod quis viverra nibh cras pulvinar. Id cursus metus aliquam eleifend mi in nulla posuere sollicitudin. Dictum sit amet justo donec. Risus nullam eget felis eget nunc lobortis mattis. Et malesuada fames ac turpis egestas maecenas pharetra. Egestas egestas fringilla phasellus faucibus scelerisque. Tortor pretium viverra suspendisse potenti nullam ac. Nunc aliquet bibendum enim facilisis gravida neque convallis.
-                                    """,
-                          style: greyText.copyWith(
-                            color: Colors.grey,
+class NewDailyChallengeBuilder extends StatefulWidget {
+  @override
+  _NewDailyChallengeBuilderState createState() =>
+      _NewDailyChallengeBuilderState();
+}
+
+class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
+  QuestionBloc _questionBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _questionBloc = BlocProvider.of<QuestionBloc>(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<QuestionBloc, QuestionState>(
+      cubit: _questionBloc,
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state is QuestionInitial) {
+          _questionBloc.add(GetDailyQuestion());
+          return buildLoading(context);
+        } else if (state is QuestionLoading) {
+          return buildLoading(context);
+        } else if (state is GetDailyQuestionSucess) {
+          return buildUI(context, state.question);
+        } else if (state is GetDailyQuestionError) {
+          Future.delayed(Duration(seconds: 2), () {
+            Scaffold.of(context).showSnackBar(getMySnackBar(
+              state.message,
+              color: Colors.red,
+            ));
+          });
+          return buildLoading(context);
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget buildUI(BuildContext context, Question question) {
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        padding: EdgeInsets.all(16),
+        child: Hero(
+          tag: 'daily_challenge_new',
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: borderRadius8.add(BorderRadius.circular(3)),
+            ),
+            elevation: 2.3,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: CupertinoScrollbar(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(20),
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Daily Challenge',
+                        style: boldHeading,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Question',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
+                      ),
+                      Text(
+                        "${question.question.questionBody}",
+                        style: greyText.copyWith(
+                          color: Colors.grey,
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Your Answer*',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        minLines: 1,
+                        maxLines: 2,
+                        toolbarOptions: ToolbarOptions(
+                          copy: true,
+                          cut: true,
+                          paste: true,
+                          selectAll: true,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Give a short answer",
+                          border: OutlineInputBorder(
+                            borderRadius: borderRadius8,
+                            borderSide: BorderSide(
+                              color: Colors.grey[100].withOpacity(0.1),
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Extra Description',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        minLines: 1,
+                        maxLines: 2,
+                        toolbarOptions: ToolbarOptions(
+                          copy: true,
+                          cut: true,
+                          paste: true,
+                          selectAll: true,
+                        ),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: borderRadius8,
+                            borderSide: BorderSide(
+                              color: Colors.grey[100].withOpacity(0.1),
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: RaisedButton(
+                          elevation: 0,
                           child: Text(
-                            'Your Answer*',
+                            'SUBMIT',
                             style: boldHeading.copyWith(
-                              fontSize: 16,
+                              color: Colors.white,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                          onPressed: () {},
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          minLines: 1,
-                          maxLines: 2,
-                          toolbarOptions: ToolbarOptions(
-                            copy: true,
-                            cut: true,
-                            paste: true,
-                            selectAll: true,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildLoading(BuildContext context) {
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        padding: EdgeInsets.all(16),
+        child: Hero(
+          tag: 'daily_challenge_new',
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: borderRadius8.add(BorderRadius.circular(3)),
+            ),
+            elevation: 2.3,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: CupertinoScrollbar(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(20),
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Daily Challenge',
+                        style: boldHeading,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Question',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
                           ),
-                          decoration: InputDecoration(
-                            hintText: "Give a short answer",
-                            border: OutlineInputBorder(
-                              borderRadius: borderRadius8,
-                              borderSide: BorderSide(
-                                color: Colors.grey[100].withOpacity(0.1),
-                                style: BorderStyle.solid,
-                              ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      LinearProgressIndicator(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Your Answer*',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        enabled: false,
+                        minLines: 1,
+                        maxLines: 2,
+                        toolbarOptions: ToolbarOptions(
+                          copy: true,
+                          cut: true,
+                          paste: true,
+                          selectAll: true,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Give a short answer",
+                          border: OutlineInputBorder(
+                            borderRadius: borderRadius8,
+                            borderSide: BorderSide(
+                              color: Colors.grey[100].withOpacity(0.1),
+                              style: BorderStyle.solid,
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Extra Description',
+                          style: boldHeading.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        minLines: 1,
+                        maxLines: 2,
+                        enabled: false,
+                        toolbarOptions: ToolbarOptions(
+                          copy: true,
+                          cut: true,
+                          paste: true,
+                          selectAll: true,
+                        ),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: borderRadius8,
+                            borderSide: BorderSide(
+                              color: Colors.grey[100].withOpacity(0.1),
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: RaisedButton(
+                          elevation: 0,
                           child: Text(
-                            'Extra Description',
+                            'SUBMIT',
                             style: boldHeading.copyWith(
-                              fontSize: 16,
+                              color: Colors.white,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                          onPressed: null,
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          minLines: 1,
-                          maxLines: 2,
-                          toolbarOptions: ToolbarOptions(
-                            copy: true,
-                            cut: true,
-                            paste: true,
-                            selectAll: true,
-                          ),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: borderRadius8,
-                              borderSide: BorderSide(
-                                color: Colors.grey[100].withOpacity(0.1),
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: RaisedButton(
-                            elevation: 0,
-                            child: Text(
-                              'SUBMIT',
-                              style: boldHeading.copyWith(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            onPressed: () {},
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
