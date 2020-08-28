@@ -1,6 +1,9 @@
+import 'package:daily_mcq/src/data/models/question.dart';
+import 'package:daily_mcq/src/data/repos/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:http/http.dart';
 
 import '../../data/models/user.dart';
 import '../../services/bloc/sign_in/googlesignin_bloc.dart';
@@ -33,6 +36,7 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
   void initState() {
     _instaHandle = TextEditingController(text: user.instaHandle);
     super.initState();
+    QuestionRepository.getQuestion(QuestionType.Weekly);
   }
 
   @override
@@ -252,4 +256,3 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
     );
   }
 }
-

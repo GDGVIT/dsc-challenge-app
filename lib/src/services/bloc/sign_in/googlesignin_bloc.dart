@@ -5,10 +5,10 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
+import '../../../data/helpers/api_response.dart';
+import '../../../data/helpers/errors.dart';
 import '../../../data/models/user.dart';
 import '../../../data/repos/user.dart';
-import '../../helpers/api_response.dart';
-import '../../helpers/errors.dart';
 
 part 'googlesignin_event.dart';
 part 'googlesignin_state.dart';

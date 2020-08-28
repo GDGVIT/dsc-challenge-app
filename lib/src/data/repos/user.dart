@@ -6,10 +6,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
-import '../../services/constants.dart';
-import '../../services/helpers/api_response.dart';
-import '../../services/helpers/errors.dart';
+import '../helpers/api_response.dart';
+import '../helpers/errors.dart';
 import '../models/user.dart';
+import '../helpers/constants.dart';
 
 class UserRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();

@@ -1,12 +1,11 @@
-import 'package:daily_mcq/src/presentation/screens/daily_challenge/new_challenge.dart';
-import 'package:daily_mcq/src/presentation/widgets/dsc_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
 import '../../utils/global_themes.dart';
+import '../widgets/dsc_title.dart';
 import '../widgets/show_up.dart';
+import 'daily_challenge/new_challenge.dart';
 import 'profile_screen.dart';
 
 class HomeScreen extends StatelessWidget {

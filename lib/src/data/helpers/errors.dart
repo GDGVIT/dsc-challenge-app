@@ -13,3 +13,6 @@ const String UNABLE_TO_LOGIN =
 
 const String INACTIVE_LOGOUT =
     "You have been signed out due to inactivity. Login again to continue";
+
+const String NO_CONTENT =
+    "No question available currently, please check back later";
