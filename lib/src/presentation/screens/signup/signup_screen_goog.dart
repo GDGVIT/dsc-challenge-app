@@ -122,12 +122,12 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SvgPicture.asset(
-                  "assets/images/dsc-logo-square.svg",
+                Image.asset(
+                  "assets/images/logo.png",
                   height: 108,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 RichText(
                   text: TextSpan(
@@ -136,7 +136,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
                       fontSize: 36,
                     ),
                     children: [
-                      TextSpan(text: 'Daily Challenges'),
+                      TextSpan(text: 'Challenges App'),
                     ],
                   ),
                 ),
@@ -144,7 +144,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
             ),
           ),
           SizedBox(
-            height: 30,
+            height: 60,
           ),
           ShowUp(
             delay: Duration(milliseconds: 300),

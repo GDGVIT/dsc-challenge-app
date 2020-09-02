@@ -28,26 +28,27 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  PreferredSize _buildAppBar(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.1),
-      child: Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-        child: Row(
-          children: <Widget>[
-            DscTitleWidget(),
-            Spacer(),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(),
-                  fullscreenDialog: true,
-                ),
+  Widget _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Row(
+        children: <Widget>[
+          DscTitleWidget(),
+          Spacer(),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+                fullscreenDialog: true,
               ),
-              child: Hero(
-                tag: "profile_pic",
+            ),
+            child: Hero(
+              tag: "profile_pic",
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height * 0.05,
+                  minWidth: MediaQuery.of(context).size.height * 0.05,
+                ),
                 child: CircleAvatar(
                   // radius: 30,
                   backgroundImage:
@@ -55,8 +56,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -100,7 +101,7 @@ class _HomescreenBuilderState extends State<HomescreenBuilder> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      // physics: BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

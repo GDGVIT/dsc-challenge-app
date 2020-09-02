@@ -68,43 +68,54 @@ class _HistoryBuilderState extends State<HistoryBuilder> {
           List<History> history = state.history.history;
           history = List.from(history.reversed);
 
-          return ListView.separated(
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: history.length,
-            itemBuilder: (context, index) => ExpansionTile(
-              leading: CircleAvatar(
-                foregroundColor: Colors.white,
-                backgroundColor:
-                    (history[index].correctAnswer == history[index].yourAnswer)
-                        ? primaryColor
-                        : Colors.redAccent,
-                child: Icon(
-                    (history[index].correctAnswer == history[index].yourAnswer)
-                        ? Icons.done
-                        : Icons.close),
-              ),
-              title: Text(
-                history[index].question,
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-              ),
-              trailing: Text(history[index].marks.toString()),
-              children: [
-                ListTile(
-                  title: Text('Your answer'),
-                  subtitle: Text(history[index].yourAnswer),
-                ),
-                ListTile(
-                  title: Text('Correct Answer'),
-                  subtitle: Text(history[index].correctAnswer),
-                ),
-                ListTile(
-                  title: Text('Marks awarded'),
-                  subtitle: Text(history[index].marks.toString()),
-                ),
-              ],
-            ),
-          );
+          return (history.length > 0)
+              ? ListView.separated(
+                  separatorBuilder: (context, index) => Divider(
+                    height: 0,
+                  ),
+                  itemCount: history.length,
+                  itemBuilder: (context, index) => ExpansionTile(
+                    backgroundColor: Colors.white,
+                    trailing: CircleAvatar(
+                      radius: 12,
+                      foregroundColor: Colors.white,
+                      backgroundColor: (history[index].correctAnswer ==
+                              history[index].yourAnswer)
+                          ? primaryColor
+                          : Colors.redAccent,
+                      child: Icon(
+                        (history[index].correctAnswer ==
+                                history[index].yourAnswer)
+                            ? Icons.done
+                            : Icons.close,
+                        size: 16,
+                      ),
+                    ),
+                    title: Text(
+                      history[index].question,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    leading: Text(history[index].marks.toString() ?? ""),
+                    children: [
+                      ListTile(
+                        title: Text('Your answer'),
+                        subtitle: Text(history[index].yourAnswer ?? ""),
+                      ),
+                      ListTile(
+                        title: Text('Correct Answer'),
+                        subtitle: Text(history[index].correctAnswer ?? ""),
+                      ),
+                      ListTile(
+                        title: Text('Marks awarded'),
+                        subtitle: Text(history[index].marks.toString() ?? ""),
+                      ),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Text('Not Found'),
+                );
         }
         return Container();
       },

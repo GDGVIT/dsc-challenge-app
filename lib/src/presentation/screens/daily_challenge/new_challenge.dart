@@ -90,6 +90,13 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
           });
           Scaffold.of(context)
               .showSnackBar(getMySnackBar("Answer submitted successfully"));
+          Future.delayed(Duration(milliseconds: 500), () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return HistoryScreen(QuestionType.Daily);
+              },
+            ));
+          });
         } else if (state is PostQuestionFailure) {
           setState(() {
             _loading = false;
@@ -128,7 +135,7 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
   Widget buildUI(BuildContext context, Question question) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 16),
         padding: EdgeInsets.all(16),
         child: Hero(
           tag: 'daily_challenge_new',
@@ -339,7 +346,7 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
   Widget buildLoading(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 16),
         padding: EdgeInsets.all(16),
         child: Hero(
           tag: 'daily_challenge_new',

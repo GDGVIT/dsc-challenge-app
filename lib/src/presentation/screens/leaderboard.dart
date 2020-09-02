@@ -32,29 +32,35 @@ class LeaderboardScreen extends StatelessWidget {
             ),
             elevation: 2.3,
             child: Container(
-              padding: EdgeInsets.all(16),
+              // padding: EdgeInsets.all(16),
               child: Scrollbar(
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Leaderboard',
-                          style: boldHeading,
+                    SliverPadding(
+                      padding: EdgeInsets.all(16),
+                      sliver: SliverToBoxAdapter(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Leaderboard',
+                            style: boldHeading,
+                          ),
                         ),
                       ),
                     ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return ListTile(
-                            leading: Text("${result[index].position}"),
-                            title: Text(result[index].username),
-                            trailing: Text("${result[index].marks.floor()}"),
-                          );
-                        },
-                        childCount: result.length,
+                    SliverPadding(
+                      padding: EdgeInsets.all(16),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return ListTile(
+                              leading: Text("${result[index].position}"),
+                              title: Text(result[index].username),
+                              trailing: Text("${result[index].marks.floor()}"),
+                            );
+                          },
+                          childCount: result.length,
+                        ),
                       ),
                     ),
                   ],

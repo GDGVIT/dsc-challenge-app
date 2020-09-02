@@ -121,12 +121,15 @@ class _InstaBuilderScreenState extends State<InstaBuilderScreen> {
                           hintText: ' @username',
                           contentPadding: EdgeInsets.all(8),
                           prefixIconConstraints:
-                              BoxConstraints.tight(Size(24, 24)),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                              BoxConstraints.tight(Size(32, 32)),
+                          prefixIcon: Container(
+                            margin: EdgeInsets.only(
+                              left: 5,
+                              right: 5,
+                            ),
                             child: Image.network(
-                              "https://cdn2.iconfinder.com/data/icons/instagram-new/512/instagram-logo-color-512.png",
-                              height: 32,
+                              "https://cdn2.iconfinder.com/data/icons/social-icons-grey/512/INSTAGRAM-512.png",
+                              // height: 34,
                               fit: BoxFit.contain,
                             ),
                           ),

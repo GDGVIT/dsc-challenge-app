@@ -9,6 +9,7 @@ import '../../../services/bloc/question/question_bloc.dart';
 import '../../../utils/global_themes.dart';
 import '../../widgets/dsc_title.dart';
 import '../../widgets/my_snackbar.dart';
+import '../history.dart';
 
 class NewWeeklyChallengeScreen extends StatelessWidget {
   static const routename = "/new-weekly-challenge";
@@ -27,7 +28,13 @@ class NewWeeklyChallengeScreen extends StatelessWidget {
             IconButton(
               color: primaryColor,
               icon: Icon(Icons.history),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) {
+                    return HistoryScreen(QuestionType.Weekly);
+                  },
+                ));
+              },
             ),
           ],
         ),
@@ -88,8 +95,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
           });
           Scaffold.of(context).showSnackBar(
             getMySnackBar(
-              state.message,
-              color: Colors.redAccent,
+              "Answer updated",
             ),
           );
         }
@@ -120,7 +126,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
   Widget buildUI(BuildContext context, Question question) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 16),
         padding: EdgeInsets.all(16),
         child: Hero(
           tag: 'weekly_challenge_new',
@@ -323,7 +329,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
   Widget buildLoading(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 16),
         padding: EdgeInsets.all(16),
         child: Hero(
           tag: 'weekly_challenge_new',
