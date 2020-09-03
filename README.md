@@ -8,7 +8,9 @@
 	<img src="https://raw.githubusercontent.com/BRO3886/dsc-challenge-app/master/assets/images/logo.png" alt="app logo" height=64>
 	<h2 align="center">DSC Challenges App</h2>
 	<h4 align="center">An app made for conducting daily and weekly challenges on specific times, such as summer break<h4>
-
+	<p align="center">
+		<a href='https://play.google.com/store/apps/details?id=com.dscvit.daily_mcq&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="64"/></a>
+	</p>
 </p>
 
 ---
