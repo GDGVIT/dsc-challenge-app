@@ -27,12 +27,30 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
-  flutter_svg:
+  bloc:
+  cupertino_icons: ^0.1.3  
+  equatable:
+  flutter_bloc:
+  flutter_svg: ^0.18.0
+  google_sign_in:
+  hive: ^1.4.2
+  hive_flutter: ^0.3.1
+  http:
+  intl: 
+  path_provider:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
+  hive_generator: ^0.7.1
+  build_runner: ^1.10.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -45,16 +63,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  
   assets:
     - assets/images/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
 
   fonts:
     - family: Montserrat

@@ -1,21 +1,30 @@
 <p align="center">
 <a href="https://dscvit.com">
-	<img src="https://user-images.githubusercontent.com/30529572/72455010-fb38d400-37e7-11ea-9c1e-8cdeb5f5906e.png" />
+	<img src="https://user-images.githubusercontent.com/30529572/92081025-fabe6f00-edb1-11ea-9169-4a8a61a5dd45.png" alt="DSC VIT"/>
 </a>
+</p>
+<p align="center">
+	<br>
+	<img src="https://raw.githubusercontent.com/BRO3886/dsc-challenge-app/master/assets/images/logo.png" alt="app logo" height=64>
 	<h2 align="center">DSC Challenges App</h2>
-	<h4 align="center">An app made for conducting daily and weekly challenges during vacations.<h4>
+	<h4 align="center">An app made for conducting daily and weekly challenges on specific times, such as summer break<h4>
+	<p align="center">
+		<a href='https://play.google.com/store/apps/details?id=com.dscvit.daily_mcq&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="64"/></a>
+	</p>
 </p>
 
 ---
-[![DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](INSERT_LINK_FOR_DOCS_HERE) 
+[![BACKEND DOCS](https://img.shields.io/badge/Documentation-see%20docs-green?style=flat-square&logo=appveyor)](https://documenter.getpostman.com/view/7638824/Szzj8J48?version=latest#6e6140d1-b586-4c5e-aeee-e730726b0230) 
   [![UI ](https://img.shields.io/badge/User%20Interface-Link%20to%20UI-orange?style=flat-square&logo=appveyor)](https://xd.adobe.com/view/1909dc61-2bf0-45ef-4e38-03572cc381c0-6f38/)
 
 
 ## Functionalities
-- [ ]  Oauth login
-- [ ]  Randomly generate question from a pool of questions
-- [ ]  Leaderboard
-- [ ]  Add instagram username to carry forward points
+- [x]  Oauth login
+- [x]  New question every day
+- [x]  New project every week
+- [x]  Leaderboard
+- [x]  Instagram handle for shoutouts
+
 <br>
 
 
@@ -28,10 +37,19 @@
 	-  VS Code (optional, but recommended)
 
 * directions to install
+
+1. First clone the Repository
 ```bash
 git clone https://github.com/GDGVIT/dsc-challenge-app.git
 ```
 
+2. In android/app/build.gradle, line 67
+```
+Uncomment  // signingConfig signingConfigs.debug
+Comment signingConfig signingConfigs.release
+```
+
+3. Configure Google Sign in (blog coming soon)
 * directions to execute
 
 ```bash
