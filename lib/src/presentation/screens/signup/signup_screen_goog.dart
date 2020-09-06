@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../../utils/global_themes.dart';
+import '../../widgets/dsc_title.dart';
 import '../../widgets/my_snackbar.dart';
 import '../../widgets/show_up.dart';
 import 'instagram_handle.dart';
@@ -44,32 +44,7 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
     return Scaffold(
       bottomNavigationBar: ShowUp(
         delay: Duration(milliseconds: 100),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SvgPicture.asset(
-              "assets/images/dsc-logo-square.svg",
-              height: 48,
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 24,
-                ),
-                children: [
-                  TextSpan(text: 'DSC '),
-                  TextSpan(
-                    text: 'VIT',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+        child: DscTitleWidget(),
       ),
       body: SafeArea(
         child: BlocConsumer<GooglesigninBloc, GooglesigninState>(
@@ -132,9 +107,9 @@ class _SignupScreenBuilderState extends State<SignupScreenBuilder> {
                 RichText(
                   text: TextSpan(
                     style: TextStyle(
-                      color: Colors.grey[700],
-                      fontSize: 36,
-                    ),
+                        color: Colors.grey[700],
+                        fontSize: 36,
+                        fontFamily: 'Montserrat'),
                     children: [
                       TextSpan(text: 'Challenges App'),
                     ],

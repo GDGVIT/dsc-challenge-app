@@ -20,6 +20,15 @@ class LeaderboardScreen extends StatelessWidget {
           color: primaryColor,
         ),
         elevation: 0,
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.history),
+            color: Theme.of(context).canvasColor,
+            disabledColor: Theme.of(context).canvasColor,
+            onPressed: null,
+          )
+        ],
         title: DscTitleWidget(),
       ),
       body: Padding(
@@ -37,7 +46,7 @@ class LeaderboardScreen extends StatelessWidget {
                 child: CustomScrollView(
                   slivers: [
                     SliverPadding(
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.only(left: 16, right: 16, top: 16),
                       sliver: SliverToBoxAdapter(
                         child: Align(
                           alignment: Alignment.center,
@@ -49,7 +58,8 @@ class LeaderboardScreen extends StatelessWidget {
                       ),
                     ),
                     SliverPadding(
-                      padding: EdgeInsets.all(16),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {

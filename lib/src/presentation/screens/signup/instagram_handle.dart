@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../services/bloc/sign_in/googlesignin_bloc.dart';
 import '../../../utils/global_themes.dart';
+import '../../widgets/dsc_title.dart';
 import '../../widgets/my_snackbar.dart';
 import '../home_screen.dart';
 
@@ -44,32 +44,7 @@ class _InstaBuilderScreenState extends State<InstaBuilderScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).canvasColor,
           centerTitle: true,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SvgPicture.asset(
-                "assets/images/dsc-logo-square.svg",
-                height: 48,
-              ),
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 24,
-                  ),
-                  children: [
-                    TextSpan(text: 'DSC '),
-                    TextSpan(
-                      text: 'VIT',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          title: DscTitleWidget(),
         ),
         body: BlocConsumer<GooglesigninBloc, GooglesigninState>(
           cubit: bloc,
