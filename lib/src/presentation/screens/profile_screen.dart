@@ -32,6 +32,7 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
   UserClass user = UserClass.fromJson(Hive.box("userBox").get("user"));
   bool loading = false;
   TextEditingController _instaHandle;
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _instaHandle = TextEditingController(text: user.instaHandle);
@@ -128,9 +129,10 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                 SizedBox(
                   height: 30,
                 ),
-                Text(
-                  "Email: ${user.email}",
-                  style: greyText,
+                RichText(
+                  text: TextSpan(
+                    children: [],
+                  ),
                 ),
                 SizedBox(
                   height: 30,
@@ -197,19 +199,27 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
       barrierDismissible: false,
       child: AlertDialog(
         title: Text('Add/Edit Instagram Handle'),
-        content: TextField(
-          controller: _instaHandle,
-          decoration: InputDecoration(
-            filled: true,
-            hintText: '@dscvitvellore',
-            hintStyle: TextStyle(
-              color: Colors.grey,
+        content: Form(
+          key: _formKey,
+          child: TextFormField(
+            controller: _instaHandle,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: '@dscvitvellore',
+              hintStyle: TextStyle(
+                color: Colors.grey,
+              ),
+              fillColor: Colors.grey[100],
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: borderRadius8,
+              ),
             ),
-            fillColor: Colors.grey[100],
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: borderRadius8,
-            ),
+            validator: (val) {
+              if (val.isEmpty) {
+                return "This field is required";
+              }
+            },
           ),
         ),
         actions: <Widget>[
@@ -232,14 +242,16 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
             ),
             textColor: primaryColor,
             onPressed: () {
-              setState(() {
-                loading = true;
-              });
-              BlocProvider.of<GooglesigninBloc>(context).add(
-                UpdateInstaHandle(
-                  handle: _instaHandle.text,
-                ),
-              );
+              if (_formKey.currentState.validate()) {
+                setState(() {
+                  loading = true;
+                });
+                BlocProvider.of<GooglesigninBloc>(context).add(
+                  UpdateInstaHandle(
+                    handle: _instaHandle.text,
+                  ),
+                );
+              }
               Navigator.maybePop(context);
             },
           ),
