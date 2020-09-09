@@ -131,7 +131,18 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                 ),
                 RichText(
                   text: TextSpan(
-                    children: [],
+                    style: greyText.copyWith(
+                      fontFamily: "Montserrat",
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Email: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(text: "${user.email}"),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -141,9 +152,23 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                   children: <Widget>[
                     Flexible(
                       flex: 1,
-                      child: Text(
-                        "Instagram: @${user.instaHandle ?? ""}",
-                        style: greyText,
+                      child: RichText(
+                        text: TextSpan(
+                          style: greyText.copyWith(
+                            fontFamily: "Montserrat",
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "Instagram: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "@${user.instaHandle ?? ""}",
+                            )
+                          ],
+                        ),
                         overflow: TextOverflow.fade,
                         softWrap: false,
                       ),
@@ -251,8 +276,8 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                     handle: _instaHandle.text,
                   ),
                 );
+                Navigator.maybePop(context);
               }
-              Navigator.maybePop(context);
             },
           ),
         ],
