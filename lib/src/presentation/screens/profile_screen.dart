@@ -32,6 +32,7 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
   UserClass user = UserClass.fromJson(Hive.box("userBox").get("user"));
   bool loading = false;
   TextEditingController _instaHandle;
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _instaHandle = TextEditingController(text: user.instaHandle);
@@ -128,9 +129,21 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                 SizedBox(
                   height: 30,
                 ),
-                Text(
-                  "Email: ${user.email}",
-                  style: greyText,
+                RichText(
+                  text: TextSpan(
+                    style: greyText.copyWith(
+                      fontFamily: "Montserrat",
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Email: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(text: "${user.email}"),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 30,
@@ -139,9 +152,23 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
                   children: <Widget>[
                     Flexible(
                       flex: 1,
-                      child: Text(
-                        "Instagram: @${user.instaHandle ?? ""}",
-                        style: greyText,
+                      child: RichText(
+                        text: TextSpan(
+                          style: greyText.copyWith(
+                            fontFamily: "Montserrat",
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "Instagram: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "@${user.instaHandle ?? ""}",
+                            )
+                          ],
+                        ),
                         overflow: TextOverflow.fade,
                         softWrap: false,
                       ),
@@ -197,19 +224,27 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
       barrierDismissible: false,
       child: AlertDialog(
         title: Text('Add/Edit Instagram Handle'),
-        content: TextField(
-          controller: _instaHandle,
-          decoration: InputDecoration(
-            filled: true,
-            hintText: '@dscvitvellore',
-            hintStyle: TextStyle(
-              color: Colors.grey,
+        content: Form(
+          key: _formKey,
+          child: TextFormField(
+            controller: _instaHandle,
+            decoration: InputDecoration(
+              filled: true,
+              hintText: '@dscvitvellore',
+              hintStyle: TextStyle(
+                color: Colors.grey,
+              ),
+              fillColor: Colors.grey[100],
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: borderRadius8,
+              ),
             ),
-            fillColor: Colors.grey[100],
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: borderRadius8,
-            ),
+            validator: (val) {
+              if (val.isEmpty) {
+                return "This field is required";
+              }
+            },
           ),
         ),
         actions: <Widget>[
@@ -232,15 +267,17 @@ class _ProfileScreenBuilderState extends State<ProfileScreenBuilder> {
             ),
             textColor: primaryColor,
             onPressed: () {
-              setState(() {
-                loading = true;
-              });
-              BlocProvider.of<GooglesigninBloc>(context).add(
-                UpdateInstaHandle(
-                  handle: _instaHandle.text,
-                ),
-              );
-              Navigator.maybePop(context);
+              if (_formKey.currentState.validate()) {
+                setState(() {
+                  loading = true;
+                });
+                BlocProvider.of<GooglesigninBloc>(context).add(
+                  UpdateInstaHandle(
+                    handle: _instaHandle.text,
+                  ),
+                );
+                Navigator.maybePop(context);
+              }
             },
           ),
         ],
