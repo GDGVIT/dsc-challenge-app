@@ -21,11 +21,14 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+//Comment out the following lines
+//----------------------
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
+//----------------------
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -50,7 +53,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    //comment out
+    //-----------------
     signingConfigs {
        release {
            keyAlias keystoreProperties['keyAlias']
@@ -58,21 +62,25 @@ android {
            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
            storePassword keystoreProperties['storePassword']
        }
-   }
+    }
+    //-----------------
 
     buildTypes {
         release {
             
-            //Un-comment this since the key and key.properties is not provided in source control
-            // signingConfig signingConfigs.debug
             
             minifyEnabled true
             useProguard true
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' 
 
-            //comment out this line
+            //comment out next line
             signingConfig signingConfigs.release
+
+            //Un-comment this since the key and key.properties is not provided in source control
+            // ||
+            // \/
+            // signingConfig signingConfigs.debug
         }
     }
 }
