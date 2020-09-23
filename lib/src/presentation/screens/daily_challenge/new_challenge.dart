@@ -1,3 +1,4 @@
+import 'package:daily_mcq/src/data/helpers/errors.dart';
 import 'package:daily_mcq/src/presentation/screens/history.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,7 @@ class NewDailyChallengeScreen extends StatelessWidget {
 
 class NewDailyChallengeBuilder extends StatefulWidget {
   @override
-  _NewDailyChallengeBuilderState createState() =>
-      _NewDailyChallengeBuilderState();
+  _NewDailyChallengeBuilderState createState() => _NewDailyChallengeBuilderState();
 }
 
 class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
@@ -88,8 +88,7 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
           setState(() {
             _loading = false;
           });
-          Scaffold.of(context)
-              .showSnackBar(getMySnackBar("Answer submitted successfully"));
+          Scaffold.of(context).showSnackBar(getMySnackBar("Answer submitted successfully"));
           Future.delayed(Duration(milliseconds: 500), () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
@@ -198,7 +197,9 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
                           child: Text(
                             "${question.question.questionBody}",
                             style: greyText.copyWith(
-                              color: Colors.grey,
+                              color: question.question.questionBody == NO_CONTENT
+                                  ? Colors.redAccent
+                                  : Colors.grey,
                             ),
                           ),
                         ),
@@ -311,24 +312,25 @@ class _NewDailyChallengeBuilderState extends State<NewDailyChallengeBuilder> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  onPressed: () {
-                                    if (_formKey.currentState.validate()) {
-                                      FocusScope.of(context).unfocus();
-                                      setState(() {
-                                        _loading = true;
-                                      });
-                                      print(question.question.id);
-                                      _questionBloc.add(
-                                        PostQuestion(
-                                          questionType: QuestionType.Daily,
-                                          id: _question.question.id,
-                                          answer: _answerController.text,
-                                          description:
-                                              _descriptionController.text,
-                                        ),
-                                      );
-                                    }
-                                  },
+                                  onPressed: question.question.questionBody == NO_CONTENT
+                                      ? null
+                                      : () {
+                                          if (_formKey.currentState.validate()) {
+                                            FocusScope.of(context).unfocus();
+                                            setState(() {
+                                              _loading = true;
+                                            });
+                                            print(question.question.id);
+                                            _questionBloc.add(
+                                              PostQuestion(
+                                                questionType: QuestionType.Daily,
+                                                id: _question.question.id,
+                                                answer: _answerController.text,
+                                                description: _descriptionController.text,
+                                              ),
+                                            );
+                                          }
+                                        },
                                 ),
                               )
                       ],

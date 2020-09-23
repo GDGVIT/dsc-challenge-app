@@ -46,8 +46,7 @@ class NewWeeklyChallengeScreen extends StatelessWidget {
 
 class NewWeeklyChallengeBuilder extends StatefulWidget {
   @override
-  _NewWeeklyChallengeBuilderState createState() =>
-      _NewWeeklyChallengeBuilderState();
+  _NewWeeklyChallengeBuilderState createState() => _NewWeeklyChallengeBuilderState();
 }
 
 class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
@@ -87,8 +86,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
           setState(() {
             _loading = false;
           });
-          Scaffold.of(context)
-              .showSnackBar(getMySnackBar("Answer submitted successfully"));
+          Scaffold.of(context).showSnackBar(getMySnackBar("Answer submitted successfully"));
         } else if (state is PostQuestionFailure) {
           setState(() {
             _loading = false;
@@ -220,7 +218,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                             selectAll: true,
                           ),
                           decoration: InputDecoration(
-                            hintText: "paste your link here",
+                            hintText: "Paste link here",
                             border: OutlineInputBorder(
                               borderRadius: borderRadius8,
                               borderSide: BorderSide(
@@ -234,8 +232,8 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                               return "link is required";
                             } else if (value.contains(" ")) {
                               return "link cannot contain spaces";
-                            } else if (!value.contains(RegExp(
-                                r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+'))) {
+                            } else if (!value.contains(
+                                RegExp(r'(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+'))) {
                               return "not a valid link";
                             }
                           },
@@ -267,7 +265,8 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                             selectAll: true,
                           ),
                           decoration: InputDecoration(
-                            hintText: "a short description about your project",
+                            hintText:
+                                "A short description about your project, challenges and outcomes",
                             border: OutlineInputBorder(
                               borderRadius: borderRadius8,
                               borderSide: BorderSide(
@@ -306,8 +305,7 @@ class _NewWeeklyChallengeBuilderState extends State<NewWeeklyChallengeBuilder> {
                                           questionType: QuestionType.Weekly,
                                           id: _question.question.id,
                                           answer: _answerController.text,
-                                          description:
-                                              _descriptionController.text,
+                                          description: _descriptionController.text,
                                         ),
                                       );
                                     }

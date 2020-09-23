@@ -16,8 +16,7 @@ enum QuestionType {
 }
 
 class QuestionRepository {
-  static Future<ApiResponse<Question>> getQuestion(
-      QuestionType questionType) async {
+  static Future<ApiResponse<Question>> getQuestion(QuestionType questionType) async {
     print("getting question with type as ${questionType.index}");
     String url = BASE_URL;
     switch (questionType) {
@@ -50,7 +49,15 @@ class QuestionRepository {
           );
           break;
         case 204:
-          return ApiResponse.error(NO_CONTENT);
+          return ApiResponse.completed(
+            Question(
+              question: QuestionClass(
+                displayDate: DateTime.now(),
+                questionType: questionType.index,
+                questionBody: NO_CONTENT,
+              ),
+            ),
+          );
           break;
         case 400:
           return ApiResponse.error(INACTIVE_LOGOUT);
