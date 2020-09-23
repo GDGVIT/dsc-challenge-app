@@ -43,10 +43,9 @@
 git clone https://github.com/GDGVIT/dsc-challenge-app.git
 ```
 
-2. In android/app/build.gradle, line 67
+2. In android/app/build.gradle, lines 24, 56, 77, 80
 ```
-Uncomment  // signingConfig signingConfigs.debug
-Comment signingConfig signingConfigs.release
+Follow instructions in code to comment out specific lines to prevent "Missing key.properties" error
 ```
 
 3. Configure Google Sign in (blog coming soon)
