@@ -34,7 +34,7 @@ class LeaderboardRepository {
     } on SocketException {
       return ApiResponse.error(NO_INTERNET_CONNECTION);
     } catch (e) {
-      return ApiResponse.error(EXCEPTION + e.toString());
+      return ApiResponse.error(EXCEPTION);
     }
   }
 }

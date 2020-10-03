@@ -72,14 +72,14 @@ class UserRepository {
           break;
         default:
           print("${jsonDecode(response.body)}");
-          return ApiResponse.error("Code ${response.statusCode}, $EXCEPTION");
+          return ApiResponse.error(EXCEPTION + " Code: ${response.statusCode}");
           break;
       }
     } on SocketException {
       return ApiResponse.error(NO_INTERNET_CONNECTION);
     } catch (e) {
       print("login exception : ${e.toString()}");
-      return ApiResponse.error(EXCEPTION + "${e.toString()}");
+      return ApiResponse.error(EXCEPTION);
     }
   }
 
@@ -117,14 +117,14 @@ class UserRepository {
           break;
         default:
           print("${jsonDecode(response.body)}");
-          return ApiResponse.error("Code ${response.statusCode}, $EXCEPTION");
+          return ApiResponse.error(EXCEPTION + " Code: ${response.statusCode}");
           break;
       }
     } on SocketException {
       return ApiResponse.error(NO_INTERNET_CONNECTION);
     } catch (e) {
       print("update_insta exception : ${e.toString()}");
-      return ApiResponse.error(EXCEPTION + "${e.toString()}");
+      return ApiResponse.error(EXCEPTION);
     }
   }
 }
