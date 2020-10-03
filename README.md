@@ -47,7 +47,6 @@ git clone https://github.com/GDGVIT/dsc-challenge-app.git
 ```
 Follow instructions in code to comment out specific lines to prevent "Missing key.properties" error
 ```
-
 3. Configure Google Sign in (blog coming soon)
 * directions to execute
 
