@@ -25,6 +25,5 @@ class UpdateInstaHandle extends GooglesigninEvent {
   UpdateInstaHandle({@required this.handle});
 
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }

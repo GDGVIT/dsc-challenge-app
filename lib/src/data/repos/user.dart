@@ -21,7 +21,8 @@ class UserRepository {
       return googleUser;
     } catch (e) {
       print("Exception on google sign in ${e.toString()}");
-    }
+
+    } 
   }
 
   Future<void> signOut() async {
