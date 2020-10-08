@@ -13,6 +13,7 @@ SnackBar getMySnackBar(String message, {Color color}) {
     ),
     behavior: SnackBarBehavior.floating,
     backgroundColor: color ?? primaryColor,
+    
   );
   return snackbar;
 }
